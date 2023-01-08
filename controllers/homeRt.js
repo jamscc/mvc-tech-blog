@@ -91,4 +91,36 @@ blogRt.get('/signup', (req, res) => {
     }
 });
 
+// dashboard
+blogRt.get('/dashboard', (req, res) => {
+    try {
+        const { loggedStatus, user_id } = req.session;
+        const rd = '/login';
+        if (user_id || loggedStatus) {
+        // Blog findAll
+        Blog.findAll({ where: { user_id: user_id } }).then((blogsUser) => {
+            // given Blog findAll
+            switch (true) {
+                case (!blogsUser):
+                    // render dashboard
+                    return res.render('dashboard');
+                default:
+                    let userBlogs = [];
+                    for (let i = 0; i < blogsUser.length; i++) {
+                        const ecBlog = blogsUser[i];
+                        userBlogs = [...userBlogs, ecBlog.get({ plain: true })];
+                    }
+                    // loggedStatus
+                    const log = { logSuccess: loggedStatus };
+                    const bg = { userBlogs };
+                    const ot = Object.assign(bg, log);
+                    // render dashboard
+                    return res.render('dashboard', ot);
+            }
+        })} else {
+            return res.redirect(rd);
+        }
+    } catch (re) { return rj(res, re) }
+});
+
 module.exports = blogRt;

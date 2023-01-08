@@ -82,4 +82,17 @@ userRt.post('/logout', (req, res) => {
   } catch (re) { return res.end() }
 });
 
+// blog - create
+userRt.post('/newblog', (req, res) => {
+  try {
+    const { blogTitleVal, blogTextVal } = req.body;
+    const { user_id } = req.session;
+    const btl = { blog_title: blogTitleVal };
+    const bt = { blog_text: blogTextVal };
+    const idU = { user_id: user_id };
+    // Blog create
+    Blog.create(Object.assign(btl, bt, idU)).then((c) => { return rj(res, c) });
+  } catch (re) { return rj(res, "An error has occurred. Please start over.", 400); }
+});
+
 module.exports = userRt;

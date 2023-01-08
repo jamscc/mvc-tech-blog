@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+
+        <div class="col-12">
+            <div class="card bg-light mb-3" style="max-width: 75rem;">
+                {{#each userBlogs}}
+                <a href="/update/{{this.id}}">
+                    <div class="card-header pt-3 pb-1 d-flex justify-content-between">
+                        <div>{{this.blog_title}}</div>
+                        <p>{{MDY this.createdAt}}</p>
+                    </div>
+                </a>
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="col-12" id="formPost" style="display: none">
+            <form class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group bg-light mb-3" style="max-width: 75rem;">
+                            <div class="card-header bg-info text-white">Add a New Blog</div>
+
+                            <div class="card-body">
+
+                                <label for="blogTitle">Title:</label>
+                                <input type="text" class="form-control" id="blogTitle">
+
+                                <label for="blogText">Text:</label>
+                                <textarea type="text" class="form-control" id="blogText" maxlength="3500" rows="5"></textarea>
+
+                                <p id="msg"></p>
+                                <button type="submit" class="btn btn-primary mt-2" id="createBtn" style="width: 100%">Add</button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="col-12 d-flex justify-content-center mb-5 mt-2">
+            <button type="button" class="btn btn-outline-primary" id="newPostBtn" style="width: 50%">New Blog Post</button>
+        </div>
+    </div>
+</div>
+
+<script src="./js/addBlog.js"></script>
