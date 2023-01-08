@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>Tech Blog</title>
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <header>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        {{#if logSuccess}}
+                        <a class="nav-link" href="/dashboard">Dashboard</a>
+                        {{else}}
+                        <a class="nav-link" href="/login">Dashboard</a>
+                        {{/if}}
+                    </li>
+                    <li class="nav-item">
+                        {{#if logSuccess}}
+                        <p class="nav-link text-primary" id="logging-out" style="cursor: pointer">Logout</p>
+                        {{else}}
+                        <a class="nav-link" href="/login">Login</a>
+                        {{/if}}
+                    </li>
+                </ul>
+                <h1 class="display-4">Tech Blog</h1>
+                <p id="lg-msg"></p>
+            </div>
+        </div>
+    </header>
+    <main>
+        {{{ body }}}
+    </main>
+    {{#if logSuccess}}
+    <script src="/js/logOut.js"></script>
+    {{/if}}
+</body>
+
+</html>
