@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card bg-light mb-3" style="max-width: 75rem;">
+                <div class="card-header d-flex justify-content-between">
+                    <div>{{blog.blog_title}}</div>
+                    <p>Posted by {{blog.userinfo.username}} on {{MDY blog.createdAt}}</p>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{blog.blog_text}}</p>
+                </div>
+                {{#if blog.comments}}
+                {{#each blog.comments}}
+                <div class="card-body">
+                    <div class="p-3 mb-2 bg-info text-white">Comments</div>
+                    <p class="card-text ml-2">{{this.comment_text}}</p>
+                    <p class="card-text ml-2">by: {{this.userinfo.username}} on {{MDY this.createdAt}}</p>
+                </div>
+                {{/each}}
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#if logSuccess}}
+<form class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group bg-light mb-3" style="max-width: 75rem;">
+                <div class="card-header">
+                    <label for="addComment">Add a Comment:</label>
+                    <textarea type="text" class="form-control" id="addComment" maxlength="1200" rows="5"></textarea>
+                    <p id="msg"></p>
+                    <button type="submit" class="btn btn-primary mt-2" id="commentBtn" style="width: 100%">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="../js/addComment.js"></script>
+{{/if}}

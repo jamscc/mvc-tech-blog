@@ -59,4 +59,27 @@ userRt.post('/signup', async (req, res) => {
   } catch (re) { return rj(res, "An error has occurred. Please start over.", 400) }
 });
 
+// comment - create
+userRt.post('/comments', (req, res) => {
+  try {
+    const { commentVal, blogID } = req.body;
+    const { user_id } = req.session;
+    const cm = { comment_text: commentVal };
+    const idU = { user_id: user_id };
+    const idB = { blog_id: blogID };
+    // Comment create
+    Comment.create(Object.assign(cm, idU, idB)).then((c) => { return rj(res, c) });
+  } catch (re) { return rj(res, "An error has occurred. Please start over.", 400); }
+});
+
+// logging out
+// session
+userRt.post('/logout', (req, res) => {
+  try {
+    req.session.destroy(() => {
+      return res.end();
+    });
+  } catch (re) { return res.end() }
+});
+
 module.exports = userRt;

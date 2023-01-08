@@ -13,7 +13,7 @@ Comment.init(
         },
 
         comment_text: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(1200),
             allowNull: false
         },
 
