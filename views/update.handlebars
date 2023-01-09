@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row">
+
+        <div class="col-12" id="formUpdate">
+            <form class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group bg-light mb-3" style="max-width: 75rem;">
+                            <div class="card-header bg-info text-white">Edit Blog</div>
+
+                            <div class="card-body">
+
+                                <label for="blogTitle">Title:</label>
+                                <input type="text" class="form-control" id="blogTitle" value="{{blog.blog_title}}">
+
+                                <label for="blogText">Text:</label>
+                                <textarea type="text" class="form-control" id="blogText" maxlength="3500" rows="5">{{blog.blog_text}}</textarea>
+
+                                <p id="msg"></p>
+                                <button type="submit" class="btn btn-primary mt-2" id="updateBtn" style="width: 100%">Update Blog</button>
+                                <button type="submit" class="btn btn-secondary text-white mt-2" id="deleteBtn" style="width: 100%">Delete Blog</button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<script src="../js/updateDelete.js"></script>

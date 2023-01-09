@@ -95,4 +95,28 @@ userRt.post('/newblog', (req, res) => {
   } catch (re) { return rj(res, "An error has occurred. Please start over.", 400); }
 });
 
+// blog - update
+userRt.put('/update/:id', (req, res) => {
+  try {
+    const { blogTitleVal, blogTextVal } = req.body;
+    const { params } = req;
+    const { id } = params;
+    const btl = { blog_title: blogTitleVal };
+    const tb = { blog_text: blogTextVal };
+    const wID = { where: { id: id } };
+    // Blog update
+    Blog.update(Object.assign(btl, tb), wID).then((c) => { return rj(res, c) })
+  } catch (re) { return rj(res, re) }
+});
+
+// blog - delete 
+userRt.delete('/delete/:id', (req, res) => {
+  try {
+    const { params } = req;
+    const { id } = params;
+    const idBw = { where: { id: id } };
+    Blog.destroy(idBw).then((dl) => { return rj(res, dl) })
+  } catch (re) { return rj(res, re) }
+});
+
 module.exports = userRt;

@@ -123,4 +123,31 @@ blogRt.get('/dashboard', (req, res) => {
     } catch (re) { return rj(res, re) }
 });
 
+// update
+blogRt.get('/update/:id', (req, res) => {
+    try {
+        const { loggedStatus, user_id } = req.session;
+        const rdl = '/login';
+        if (user_id || loggedStatus) {
+            const { params } = req;
+            const { id } = params;
+            // Blog findByPk
+            Blog.findByPk(id).then((bd) => {
+                if (!bd || (user_id != bd.user_id)) {
+                    return res.redirect('/dashboard');
+                }
+                let blog = {};
+                blog = Object.assign(blog, bd.get({ plain: true }));
+                const log = { logSuccess: loggedStatus };
+                const bg = { blog };
+                const ot = Object.assign(bg, log);
+                // render update
+                res.render('update', ot);
+            })
+        } else {
+            return res.redirect(rdl);
+        }
+    } catch (re) { return rj(res, re) }
+});
+
 module.exports = blogRt;
